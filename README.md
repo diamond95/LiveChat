@@ -1,7 +1,11 @@
 Database name: chat
+
 Username: root
+
 Password: 
+
 Host: localhost
+
 
 Upload chat.sql to your server / localhost 
 If you are going to have limited users with some passwords use http://www.passwordtool.hu/php5-password-hash-generator to hash passwords and store into table login.
@@ -16,17 +20,28 @@ At line 3: date_default_timezone_set('Your location goes here');  - Change your 
 
 
 
-login.php details(currently) 
+login.php details(currently):
+
 username: admin
+
 password: admin
+
+
+
 
 
 username: test
+
 password: admin
+
+
+
 
 
 username: user
+
 password: admin
+
 
 
 
