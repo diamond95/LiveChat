@@ -8,8 +8,11 @@
 Upload **chat.sql** to your server / localhost (check **database_connection.php** for details).
 
 If you are going to have limited users with some passwords use http://www.passwordtool.hu/php5-password-hash-generator to hash passwords and store into table login.
-Otherwise if you are going to make register page as you wish use php5 function 'password_hash()'.
 
+Otherwise if you are going to make **register** page as you wish use php5 function: 
+```php
+                     password_hash();
+```
 ### Todos
 
 Open database_connection.php 
@@ -23,15 +26,22 @@ Change your location using (http://php.net/manual/en/timezones.php) this link.
 
 
 ## Authors
-Ivan Miljanić
+      Ivan Miljanić
+
 
 License
 ----
 
-MIT
+      MIT
 
 
 **Free Software, Hell Yeah!**
 
-Run login.php and have fun. :) 
+      Run login.php and have fun. :) 
+
+
+## Donations
+---
+      If this project help you reduce time to develop, you can give me a cup of coffee :)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](ivanvk95@gmail.com)
 
