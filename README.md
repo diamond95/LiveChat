@@ -15,9 +15,9 @@ Otherwise if you are going to make register page as you wish use php5 function '
 Open database_connection.php 
  - Line 2: (connection to database)
 Change it using your database name, username and password. 
- - Line 3: 
-```sh
-date_default_timezone_set('Your location goes here');
+ - Line 3:
+ ```sh
+         date_default_timezone_set('Your location goes here');
 ```
 Change your location using (http://php.net/manual/en/timezones.php) this link. 
 
