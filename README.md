@@ -1,3 +1,4 @@
+![Screenshot](https://raw.githubusercontent.com/diamond95/LiveChat/master/2.png)
 
 Upload chat.sql to your server / localhost (check database_connection.php for details).
 
