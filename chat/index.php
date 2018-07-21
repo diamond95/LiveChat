@@ -16,23 +16,15 @@ if(!isset($_SESSION['user_id'])){
 		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		<script src='https://cdn.rawgit.com/admsev/jquery-play-sound/master/jquery.playSound.js'></script> <!-- SCRIPT FOR SOUND NOTIFICATIONS --->
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--===============================================================================================-->	
+		<meta name="viewport" content="width=device-width, initial-scale=1">	
 		<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
-	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
-	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
-	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
-	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
-	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
-	<!--===============================================================================================-->
 		<link rel="stylesheet" type="text/css" href="css/util.css">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
-	<!--===============================================================================================-->
     </head>  
 	<body>  
 		<br />
@@ -55,7 +47,6 @@ if(!isset($_SESSION['user_id'])){
 							</thead>
 						</table>
 					</div>
-					
 					<div class="table100-body js-pscroll">
 						<table>
 							<tbody>
@@ -83,70 +74,64 @@ $(document).ready(function(){
 	fetch_user();
  }, 5000);
 
- function fetch_user()
- {
-  $.ajax({
-   url:"fetch_user.php",
-   method:"POST",
-   success:function(data){
-    $('#user_details').html(data);
-   }
-  })
+ function fetch_user() {
+	$.ajax({
+		url:"fetch_user.php",
+		method:"POST",
+		success:function(data){
+			$('#user_details').html(data);
+		}
+	})
  }
 
- function update_last_activity()
- {
-  $.ajax({
-   url:"update_last_activity.php",
-   success:function()
-   {
-
-   }
-  })
+ function update_last_activity() {
+	$.ajax({
+		url:"update_last_activity.php",
+		success:function(){}
+	})
  }
 
- function make_chat_dialog_box(to_user_id, to_user_name)
- {
-  var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" style="background-color:" title="You have chat with '+to_user_name+'">';
-  modal_content += '<div style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;" class="chat_history" data-touserid="'+to_user_id+'" id="chat_history_'+to_user_id+'">';
-  modal_content += '</div>';
-  modal_content += '<div class="form-group">';
-  modal_content += '<textarea name="chat_message_'+to_user_id+'" id="chat_message_'+to_user_id+'" class="form-control xd"></textarea>';
-  modal_content += '</div><div class="form-group" align="right">';
-  modal_content+= '<button type="button" name="send_chat" id="'+to_user_id+'" class="btn btn-info send_chat">Send</button></div></div>';
-  $('#user_model_details').html(modal_content);
- }
+function make_chat_dialog_box(to_user_id, to_user_name) {
+	var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" style="background-color:" title="You have chat with '+to_user_name+'">';
+	modal_content += '<div style="height:400px; border:1px solid #ccc; overflow-y: scroll; margin-bottom:24px; padding:16px;" class="chat_history" data-touserid="'+to_user_id+'" id="chat_history_'+to_user_id+'">';
+	modal_content += '</div>';
+	modal_content += '<div class="form-group">';
+	modal_content += '<textarea name="chat_message_'+to_user_id+'" id="chat_message_'+to_user_id+'" class="form-control xd"></textarea>';
+	modal_content += '</div><div class="form-group" align="right">';
+	modal_content+= '<button type="button" name="send_chat" id="'+to_user_id+'" class="btn btn-info send_chat">Send</button></div></div>';
+	$('#user_model_details').html(modal_content);
+}
 
- $(document).on('click', '.start_chat', function(){
-  var to_user_id = $(this).data('touserid');
-  var to_user_name = $(this).data('tousername');
-  make_chat_dialog_box(to_user_id, to_user_name);
-  $("#user_dialog_"+to_user_id).dialog({
-   autoOpen:false,
-   width:400
-  });
-  $('#user_dialog_'+to_user_id).dialog('open');
-  setInterval(function(){ // set interval for take messages for every 5 seconds and show into chat / If your server is really good, you can set to every 1000 miliseconds ( which means 1 sec )
-	hvataj();
-  }, 1000); // <---- here 
-  function hvataj() {
+$(document).on('click', '.start_chat', function(){
+	var to_user_id = $(this).data('touserid');
+	var to_user_name = $(this).data('tousername');
+	make_chat_dialog_box(to_user_id, to_user_name);
+	
+	$("#user_dialog_"+to_user_id).dialog({
+		autoOpen:false,
+		width:400
+	});
+	$('#user_dialog_'+to_user_id).dialog('open');
+		setInterval(function(){ // set interval for take messages for every 1 seconds and show into chat 
+			refreshMsg();
+		}, 1000); // <---- here 
+function refreshMsg() {
 	var hvatajPoruke = $.ajax({
-		  url: "dohvati_poruke.php",
+		  url: "take_msg.php",
 		  method: "POST",
 		  data:{to_user_id:to_user_id},
 		  success: function(data) {
 			  $('#chat_history_'+to_user_id).html(data);
 		  }
-	  })
-  }
- });
+	 })
+}
+});
  //abort ajax call if user close chat :) 
 $( ".selector" ).on( "dialogclose", function( event, ui ) {
-		alert("CLOSED!!!!");
-} );
+		//alert("todo - later");
+});
 
- 
- $(document).on('click', '.send_chat', function(){
+$(document).on('click', '.send_chat', function(){
 	$.playSound("mp3/click.mp3") // here we set MP3 SOUND FOR "send" button click
 	var to_user_id = $(this).attr('id');
 	var chat_message = $('#chat_message_'+to_user_id).val();
