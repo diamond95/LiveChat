@@ -62,6 +62,7 @@ if(!isset($_SESSION['user_id'])){
 	</div>
 	</body>
 </html>  
+
 <script>  
 $(document).ready(function(){
  fetch_user();
